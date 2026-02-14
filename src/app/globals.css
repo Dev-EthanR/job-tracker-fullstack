@@ -1,21 +1,46 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: #f2f2f2;
+  --secondary: #b0c3eb;
+  --accent: #3d7dd7;
+  --text: #31394e;
+  --subtext: #a9aab8;
+  --hover: #1c4b8a;
+  --applied: #5d5de3;
+  --offer: #47c5de;
+  --interview: #de8a2c;
+  --rejected: #de1843;
+  --sucess: #359171;
+  --error: #d36f6f;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-text: var(--text);
+  --color-subtext: var(--subtext);
+  --color-hover: var(--hover);
+  --color-applied: var(--applied);
+  --color-offer: var(--offer);
+  --color-interview: var(--interview);
+  --color-rejected: var(--rejected);
+  --color-sucess: var(--sucess);
+  --color-error: var(--error);
+  --color-dark-primary: #273246;
+  --color-dark-secondary: #293655;
+  --color-dark-text: #cad2de;
+  --color-dark-subtext: #cdced1;
+  --color-dark-hover: #6190cf;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer components {
+  .active {
+    color: #3d7dd7;
+    font-weight: 700;
   }
 }
 
@@ -23,4 +48,14 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer animation {
+  @media screen and (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
 }
