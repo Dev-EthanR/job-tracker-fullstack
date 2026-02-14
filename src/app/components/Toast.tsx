@@ -21,7 +21,7 @@ const Toast = () => {
 
   return (
     <div
-      className={`fixed bottom-5 left-1/2 -translate-x-1/2 z-10 rounded-md flex items-center justify-center gap-7 w-full max-w-85 md:max-w-105 py-3 px-3 whitespace-nowrap text-base md:text-xl font-semibold ${toastOpen.color} text-white select-none `}
+      className={`fixed bottom-5 left-1/2 -translate-x-1/2 z-10 rounded-md flex items-center justify-center gap-7 w-fit py-3 px-3 whitespace-nowrap text-base md:text-xl font-semibold ${toastOpen.color} text-white select-none `}
       aria-live="polite"
       role="alert"
       aria-label={toastOpen.message || ""}

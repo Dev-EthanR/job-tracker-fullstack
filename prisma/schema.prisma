@@ -10,8 +10,9 @@ datasource db {
 model Application {
   id        String   @id @default(cuid())
   company   String
-  role      String
-  Status    Status   @default(APPLIED)
+  position  String
+  status    Status   @default(APPLIED)
+  date      String
   notes     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

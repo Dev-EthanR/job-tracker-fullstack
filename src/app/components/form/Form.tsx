@@ -78,18 +78,18 @@ const Form = ({
             formType={id}
           />
         ))}
-        <label className="flex justify-between" htmlFor="label">
+        <label className="flex justify-between" htmlFor="status">
           <span>
-            Label:{" "}
+            Status:{" "}
             {id === "add" && <span className="text-red-400 ml-1">*</span>}
           </span>
-          {errors.label && (
-            <p className="text-red-400">{errors.label.message}</p>
+          {errors.status && (
+            <p className="text-red-400">{errors.status.message}</p>
           )}
         </label>
         <select
-          id="label"
-          {...register("label")}
+          id="status"
+          {...register("status")}
           className={`block w-full  border rounded-md mt-1 mb-3 h-10 px-4 mr-4 ${theme === "dark" ? "border-gray-600 focus:outline-gray-600 " : "border-gray-300 focus:outline-gray-400"} `}
         >
           <LabelOptions />

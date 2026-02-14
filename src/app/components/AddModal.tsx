@@ -4,13 +4,18 @@ import useAddModal from "@/src/hooks/useAddModal";
 import useData from "@/src/hooks/useData";
 import useToast from "@/src/hooks/useToast";
 import Form from "./form/Form";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const AddModal = () => {
   const { modalOpen, setModalOpen } = useAddModal();
-  const { setData } = useData();
+  // const { setData } = useData();
   const { setToastOpen } = useToast();
+  const [defaultLabel, setDefaultLabel] = useState<string | null>("");
 
-  const defaultLabel: string | null = localStorage.getItem("defaultLabel");
+  useEffect(() => {
+    setDefaultLabel(localStorage.getItem("defaultLabel"));
+  }, []);
 
   return (
     <Form
@@ -18,15 +23,24 @@ const AddModal = () => {
       open={modalOpen}
       title="Add Application"
       submitLabel="Apply"
-      defaultValues={{ label: defaultLabel || "" }}
+      defaultValues={{ status: defaultLabel || "" }}
       onClose={() => setModalOpen(false)}
-      onSubmit={(data) => {
-        setData((prev) => [{ id: uuidv4(), ...data }, ...prev]);
-        setToastOpen({
-          open: true,
-          message: "Successfully Added Application",
-          color: "bg-green-600",
-        });
+      onSubmit={async (data) => {
+        try {
+          await axios.post("/api/applications", data);
+          setToastOpen({
+            open: true,
+            message: "Successfully Added Application",
+            color: "bg-green-600",
+          });
+        } catch (e) {
+          console.log(e);
+          setToastOpen({
+            open: true,
+            message: "An Error occured while trying to add application",
+            color: "bg-red-600",
+          });
+        }
         setModalOpen(false);
       }}
     />
