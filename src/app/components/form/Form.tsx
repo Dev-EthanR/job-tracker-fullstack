@@ -12,7 +12,7 @@ import type { FormType } from "./FormInput";
 import Input from "./FormInput";
 import LabelOptions from "./FormOptions";
 import { BeatLoader } from "react-spinners";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 interface Props {
   id: FormType;
   open: boolean;
@@ -52,7 +52,12 @@ const Form = ({
     onClose();
   }
 
-  const defaultLabel: string | null = localStorage.getItem("defaultLabel");
+  const [defaultLabel, setDefaultLabel] = useState<string | null>(null);
+
+  useEffect(() => {
+    const label = localStorage.getItem("defaultLabel");
+    setDefaultLabel(label);
+  }, []);
 
   const fields: FormFields[] = [
     { name: "Company", key: "company", type: "text", error: errors.company },

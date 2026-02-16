@@ -8,12 +8,21 @@ import Container from "./Container";
 const ClearData = () => {
   const { setToastOpen } = useToast();
   const clearData = async () => {
-    await axios.delete("/api/applications");
-    setToastOpen({
-      open: true,
-      message: "Successfully Deleted Data",
-      color: "bg-red-600",
-    });
+    try {
+      await axios.delete("/api/applications");
+      setToastOpen({
+        open: true,
+        message: "Successfully Deleted Data",
+        color: "bg-red-600",
+      });
+    } catch (error) {
+      console.error("Error deleting data:", error);
+      setToastOpen({
+        open: true,
+        message: "An Error Occured",
+        color: "bg-red-600",
+      });
+    }
   };
   const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
   return (

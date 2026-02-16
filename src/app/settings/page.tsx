@@ -1,3 +1,4 @@
+import Toast from "../components/Toast";
 import ClearData from "./components/ClearData";
 import DefaultLabel from "./components/DefaultLabel";
 import DeleteConfirmation from "./components/DeleteConfirmation";
@@ -11,6 +12,7 @@ const page = () => {
       <DefaultLabel />
       <DeleteConfirmation />
       <Theme />
+      <Toast />
     </SettingsWrapper>
   );
 };
