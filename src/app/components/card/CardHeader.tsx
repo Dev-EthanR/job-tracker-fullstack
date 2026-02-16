@@ -1,9 +1,9 @@
+import { Application } from "@/src/generated/prisma/client";
 import useTheme from "@/src/hooks/useTheme";
-import type Data from "@/src/entities/Data";
 import Link from "next/link";
 
 interface Props {
-  cardData: Data;
+  cardData: Application;
 }
 
 const CardHeader = ({ cardData }: Props) => {
@@ -11,7 +11,7 @@ const CardHeader = ({ cardData }: Props) => {
 
   return (
     <div className="flex gap-1 flex-col md:flex-row md:items-center md:gap-x-5 flex-wrap">
-      <Link href={`application/${cardData.id}`} state={{ cardData }}>
+      <Link href={`application/${cardData.id}`}>
         <h3
           className={`tracking-tight  ${theme === "dark" ? "text-blue-400" : "text-accent"} text-xl font-bold md:text-3xl hover:cursor-pointer`}
           onPointerDown={(e) => e.stopPropagation()}
