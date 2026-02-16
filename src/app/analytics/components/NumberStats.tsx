@@ -1,11 +1,9 @@
+import { Application } from "@/src/generated/prisma/client";
 import StatBox from "./StatBox";
-import useData from "@/src/hooks/useData";
 
-const NumberStats = () => {
-  const { data } = useData();
-
-  function dataLength(label: string): number {
-    return data.filter((d) => d.label === label).length;
+const NumberStats = ({ data }: { data: Application[] }) => {
+  function dataLength(status: string): number {
+    return data.filter((d) => d.status === status).length;
   }
 
   return (

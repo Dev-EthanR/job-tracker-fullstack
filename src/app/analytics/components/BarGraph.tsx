@@ -1,3 +1,4 @@
+"use client";
 import type { ChartOptions } from "chart.js";
 import {
   BarElement,
@@ -9,8 +10,8 @@ import {
   Tooltip,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import useData from "@/src/hooks/useData";
 import useTheme from "@/src/hooks/useTheme";
+import { Application } from "@/src/generated/prisma/client";
 
 ChartJS.register(
   CategoryScale,
@@ -32,22 +33,21 @@ interface GraphType {
   datasets: DataSets[];
 }
 
-const BarGraph = () => {
-  const { data } = useData();
+const BarGraph = ({ data }: { data: Application[] }) => {
   const { theme } = useTheme();
 
-  function dataLength(label: string): number {
-    return data.filter((d) => d.label === label).length;
+  function dataLength(status: string): number {
+    return data.filter((d) => d.status === status).length;
   }
 
   const labels = ["Applied", "Interview", "Offer", "Rejected"];
 
   // get Lengths for each label
   const newData: number[] = [
-    dataLength("Applied"),
-    dataLength("Interview"),
-    dataLength("Offer"),
-    dataLength("Rejected"),
+    dataLength("APPLIED"),
+    dataLength("INTERVIEW"),
+    dataLength("OFFER"),
+    dataLength("REJECTED"),
   ];
 
   const options: ChartOptions<"bar"> = {
