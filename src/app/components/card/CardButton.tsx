@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useTheme from "@/src/hooks/useTheme";
 import Image from "next/image";
+import useToast from "@/src/hooks/useToast";
 
 interface Props {
   setEditModal: (toggle: boolean) => void;
@@ -11,6 +12,7 @@ interface Props {
 const CardButton = ({ setEditModal, setDeleteModal, deleteAction }: Props) => {
   const [optionsOpened, setOpionsOpened] = useState<boolean>(false);
   const { theme } = useTheme();
+  const { setToastOpen } = useToast();
 
   function modalOption(setModal: (option: boolean) => void): void {
     setOpionsOpened(false);
@@ -24,7 +26,14 @@ const CardButton = ({ setEditModal, setDeleteModal, deleteAction }: Props) => {
     if (confirmDelete) {
       modalOption(setDeleteModal);
     } else {
-      if (deleteAction) deleteAction();
+      if (deleteAction) {
+        deleteAction();
+        setToastOpen({
+          open: true,
+          message: "Successfully Deleted Application",
+          color: "bg-red-600",
+        });
+      }
     }
   }
 

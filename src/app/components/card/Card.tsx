@@ -1,3 +1,4 @@
+"use client";
 import { useDraggable } from "@dnd-kit/core";
 import { useState } from "react";
 import DeleteModal from "../DeleteModal";
@@ -7,6 +8,8 @@ import CardFooter from "./CardFooter";
 import CardHeader from "./CardHeader";
 import useTheme from "@/src/hooks/useTheme";
 import { Application } from "@/src/generated/prisma/client";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 interface Props {
   cardData: Application;
@@ -18,6 +21,7 @@ const Card = ({ cardData, color, data }: Props) => {
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
   const { theme } = useTheme();
+  const router = useRouter();
 
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: cardData.id,
@@ -49,12 +53,11 @@ const Card = ({ cardData, color, data }: Props) => {
             <CardButton
               setEditModal={setEditModalOpen}
               setDeleteModal={setDeleteModalOpen}
-              deleteAction={() =>
-                // setData((prevData) =>
-                //   prevData.filter((d) => d.id != cardData.id),
-                // )
-                {}
-              }
+              deleteAction={async () => {
+                await axios.delete(`/api/applications/${cardData.id}`);
+                router.push("/application");
+                router.refresh();
+              }}
             />
           </div>
         </div>
@@ -75,10 +78,11 @@ const Card = ({ cardData, color, data }: Props) => {
       <DeleteModal
         open={deleteModalOpen}
         setOpen={setDeleteModalOpen}
-        deleteAction={() =>
-          // setData((prevData) => prevData.filter((d) => d.id != cardData.id))
-          {}
-        }
+        deleteAction={async () => {
+          await axios.delete(`/api/applications/${cardData.id}`);
+          router.push("/application");
+          router.refresh();
+        }}
         heading="Delete Application"
       >
         Are you sure you want to delete the application? <br /> This action
