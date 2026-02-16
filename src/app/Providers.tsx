@@ -8,12 +8,6 @@ import {
   type Dispatch,
   type SetStateAction,
 } from "react";
-import type Data from "../entities/Data";
-
-interface DataType {
-  data: Data[];
-  setData: Dispatch<SetStateAction<Data[]>>;
-}
 
 export interface ThemeType {
   theme: string;
@@ -35,12 +29,10 @@ interface Props {
   children: ReactNode;
 }
 
-export const DataCtx = createContext<DataType | null>(null);
 export const ThemeCtx = createContext<ThemeType | null>(null);
 export const ToastCtx = createContext<ToastType | null>(null);
 
 export default function Providers({ children }: Props) {
-  const [data, setData] = useState<Data[]>([]);
   const [toastOpen, setToastOpen] = useState<Toast>({
     open: false,
     message: null,
@@ -49,9 +41,6 @@ export default function Providers({ children }: Props) {
   const [theme, setTheme] = useState("light");
 
   useEffect(() => {
-    const storedData = localStorage.getItem("jobData");
-    if (storedData) setData(JSON.parse(storedData));
-
     const storedTheme =
       localStorage.getItem("theme") ??
       (window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -62,20 +51,14 @@ export default function Providers({ children }: Props) {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("jobData", JSON.stringify(data));
-  }, [data]);
-
-  useEffect(() => {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
   return (
     <ThemeCtx.Provider value={{ theme, setTheme }}>
-      <DataCtx.Provider value={{ data, setData }}>
-        <ToastCtx.Provider value={{ toastOpen, setToastOpen }}>
-          {children}
-        </ToastCtx.Provider>
-      </DataCtx.Provider>
+      <ToastCtx.Provider value={{ toastOpen, setToastOpen }}>
+        {children}
+      </ToastCtx.Provider>
     </ThemeCtx.Provider>
   );
 }

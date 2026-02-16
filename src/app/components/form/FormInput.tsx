@@ -3,6 +3,7 @@ import { type UseFormRegister, type UseFormSetFocus } from "react-hook-form";
 import type FormFields from "@/src/entities/FormFields";
 import { type FormDataShape } from "@/src/utilities/schema";
 import useTheme from "@/src/hooks/useTheme";
+import { Application } from "@/src/generated/prisma/client";
 
 export type FormType = "add" | "edit";
 
@@ -11,9 +12,16 @@ interface Props {
   register: UseFormRegister<FormDataShape>;
   setFocus: UseFormSetFocus<FormDataShape>;
   formType: FormType;
+  defaultValues?: Application;
 }
 
-const Input = ({ input, register, formType, setFocus }: Props) => {
+const Input = ({
+  input,
+  register,
+  formType,
+  setFocus,
+  defaultValues,
+}: Props) => {
   const { theme } = useTheme();
 
   useEffect(() => {
@@ -37,6 +45,7 @@ const Input = ({ input, register, formType, setFocus }: Props) => {
         type={input.type}
         aria-required
         autoComplete="off"
+        defaultValue={(defaultValues && defaultValues[input.key]) || ""}
         {...register(input.key)}
       />
     </div>

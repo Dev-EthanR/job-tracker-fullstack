@@ -2,11 +2,11 @@ import useTheme from "@/src/hooks/useTheme";
 
 interface Props {
   color: string;
-  label: string;
+  status: string;
   date: string;
 }
 
-const CardFooter = ({ color, label, date }: Props) => {
+const CardFooter = ({ color, status, date }: Props) => {
   const formattedDate: string = new Date(`${date}`).toDateString().substring(4);
   const { theme } = useTheme();
 
@@ -18,7 +18,7 @@ const CardFooter = ({ color, label, date }: Props) => {
         <div
           className={`h-2.5 w-2.5 ${color} rounded-full hidden md:block `}
         ></div>
-        {label}
+        {status}
       </span>
       <span
         className={`font-medium text-xs tracking-tight ${theme === "dark" ? "text-dark-subtext" : "text-text"}`}

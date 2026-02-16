@@ -1,28 +1,29 @@
-import type Data from "@/src/entities/Data";
+"use client";
+import { Application } from "@/src/generated/prisma/client";
 import useTheme from "@/src/hooks/useTheme";
 
 interface Props {
-  id: string;
+  card: Application;
 }
 
-const CardInfo = ({ id }: Props) => {
+const CardInfo = ({ card }: Props) => {
   const { theme } = useTheme();
-  //   const formattedDate: string = new Date(`${data.date}`).toLocaleString(
-  //     "en-US",
-  //     {
-  //       weekday: "long",
-  //       month: "long",
-  //       day: "numeric",
-  //       year: "numeric",
-  //     },
-  //   );
+  const formattedDate: string = new Date(`${card.date}`).toLocaleString(
+    "en-US",
+    {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    },
+  );
 
   return (
     <div
       className={`w-100  ${theme === "dark" ? "bg-dark-primary shadow-gray-950" : "bg-primary shadow-gray-300"} rounded-lg shadow-md p-6`}
     >
-      {/* <h1 className="border-b border-gray-400 text-4xl font-semibold text-blue-400 pb-2 mb-4">
-        {data.company}
+      <h1 className="border-b border-gray-400 text-4xl font-semibold text-blue-400 pb-2 mb-4">
+        {card.company}
       </h1>
       <h2
         className={`border-b border-gray-300 text-lg  pb-2 mb-4 font-semibold ${theme === "dark" ? "text-dark-text " : "text-text"} `}
@@ -31,7 +32,7 @@ const CardInfo = ({ id }: Props) => {
         <span
           className={`ml-2 font-semibold ${theme === "dark" ? "text-white " : "text-black"}`}
         >
-          {data.position}
+          {card.position}
         </span>
       </h2>
       <h2
@@ -49,7 +50,7 @@ const CardInfo = ({ id }: Props) => {
       >
         Status:{" "}
         <span className="bg-orange-500 text-white rounded-full text-center w-fit px-4 py-1 font-semibold ml-4">
-          {data.label}
+          {card.status}
         </span>
       </div>
       <p
@@ -59,10 +60,9 @@ const CardInfo = ({ id }: Props) => {
         <span
           className={`font-semibold ${theme === "dark" ? "text-white " : "text-black"} `}
         >
-          {data.notes || "No notes..."}
+          {card.notes || "No notes..."}
         </span>
-      </p> */}
-      id: {id}
+      </p>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+"use client";
 import { useEffect } from "react";
 import useToast from "@/src/hooks/useToast";
 import Image from "next/image";

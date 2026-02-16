@@ -1,24 +1,26 @@
+"use client";
+import type ColumnDetails from "@/src/entities/ColumnDetails";
 import { useDroppable } from "@dnd-kit/core";
 import { useState } from "react";
-import type ColumnDetails from "@/src/entities/ColumnDetails";
-import type Data from "@/src/entities/Data";
 // import icon from "../../assets/icons/dropdown.svg";
 import useAnimateHeight from "@/src/hooks/useAnimateHeight";
+import Image from "next/image";
 import Card from "./card/Card";
 import NotFound from "./NotFound";
-import Image from "next/image";
+import { Application } from "@/src/generated/prisma/client";
 
 interface Props {
   column: ColumnDetails;
-  data: Data[];
+  data: Application[];
 }
 
 const Columns = ({ column, data }: Props) => {
   const [open, setOpen] = useState(true);
 
   const { setNodeRef } = useDroppable({ id: column.title });
-
-  const filteredData = data.filter((item) => item.label === column.title);
+  const filteredData = data.filter(
+    (item) => item.status.toLowerCase() === column.title.toLowerCase(),
+  );
 
   const { height, contentRef } = useAnimateHeight(open, filteredData.length);
 
@@ -56,7 +58,12 @@ const Columns = ({ column, data }: Props) => {
           />
         ) : (
           filteredData.map((card) => (
-            <Card key={card.id} cardData={card} color={column.color} />
+            <Card
+              key={card.id}
+              cardData={card}
+              color={column.color}
+              data={data}
+            />
           ))
         )}
       </div>

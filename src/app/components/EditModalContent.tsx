@@ -1,51 +1,45 @@
 "use client";
+import { Application } from "@/src/generated/prisma/client";
 import useToast from "@/src/hooks/useToast";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import Form from "./form/Form";
+import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 interface Props {
+  card: Application;
   open: boolean;
-  setOpen: (open: boolean) => void;
+  setOpen: (toggle: boolean) => void;
 }
 
-const AddModal = ({ open, setOpen }: Props) => {
-  // const { setData } = useData();
-  const router = useRouter();
-
+const EditModalContent = ({ card, open, setOpen }: Props) => {
   const { setToastOpen } = useToast();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [defaultLabel, setDefaultLabel] = useState<string | null>(null);
-
-  useEffect(() => {
-    const item = localStorage.getItem("defaultLabel");
-    if (!item) return;
-    setDefaultLabel(item);
-  }, []);
 
   return (
     <Form
-      id="add"
+      id="edit"
       open={open}
-      title="Add Application"
-      submitLabel="Apply"
+      title="Edit Application"
+      submitLabel="Save"
+      defaultValues={card}
       onClose={() => setOpen(false)}
-      onSubmit={async (data) => {
+      onSubmit={async (formData) => {
         try {
           setLoading(true);
-          await axios.post("/api/applications", data);
+          await axios.patch(`/api/applications/${card.id}`, formData);
           router.push("/application");
           router.refresh();
           setLoading(false);
           setToastOpen({
             open: true,
-            message: "Successfully Added Application",
+            message: "Successfully Updated Application",
             color: "bg-green-600",
           });
-        } catch (e) {
+        } catch (error) {
           setLoading(false);
-          console.log(e);
+          console.log(error);
           setToastOpen({
             open: true,
             message: "An Error occured while trying to add application",
@@ -59,4 +53,4 @@ const AddModal = ({ open, setOpen }: Props) => {
   );
 };
 
-export default AddModal;
+export default EditModalContent;

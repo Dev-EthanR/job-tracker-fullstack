@@ -1,23 +1,22 @@
 import { useDraggable } from "@dnd-kit/core";
 import { useState } from "react";
-import type Data from "@/src/entities/Data";
 import DeleteModal from "../DeleteModal";
 import EditModal from "../EditModal";
 import CardButton from "./CardButton";
 import CardFooter from "./CardFooter";
 import CardHeader from "./CardHeader";
-import useData from "@/src/hooks/useData";
 import useTheme from "@/src/hooks/useTheme";
+import { Application } from "@/src/generated/prisma/client";
 
 interface Props {
-  cardData: Data;
+  cardData: Application;
   color: string;
+  data: Application[];
 }
 
-const Card = ({ cardData, color }: Props) => {
+const Card = ({ cardData, color, data }: Props) => {
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
-  const { setData } = useData();
   const { theme } = useTheme();
 
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -51,9 +50,10 @@ const Card = ({ cardData, color }: Props) => {
               setEditModal={setEditModalOpen}
               setDeleteModal={setDeleteModalOpen}
               deleteAction={() =>
-                setData((prevData) =>
-                  prevData.filter((d) => d.id != cardData.id),
-                )
+                // setData((prevData) =>
+                //   prevData.filter((d) => d.id != cardData.id),
+                // )
+                {}
               }
             />
           </div>
@@ -61,7 +61,7 @@ const Card = ({ cardData, color }: Props) => {
         <div className="flex items-center justify-between md:justify-start">
           <CardFooter
             color={color}
-            label={cardData.label}
+            status={cardData.status}
             date={cardData.date}
           />
         </div>
@@ -76,7 +76,8 @@ const Card = ({ cardData, color }: Props) => {
         open={deleteModalOpen}
         setOpen={setDeleteModalOpen}
         deleteAction={() =>
-          setData((prevData) => prevData.filter((d) => d.id != cardData.id))
+          // setData((prevData) => prevData.filter((d) => d.id != cardData.id))
+          {}
         }
         heading="Delete Application"
       >
@@ -87,6 +88,7 @@ const Card = ({ cardData, color }: Props) => {
         open={editModalOpen}
         setOpen={setEditModalOpen}
         cardId={cardData.id}
+        data={data}
       />
     </>
   );
