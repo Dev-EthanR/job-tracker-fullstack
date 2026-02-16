@@ -2,7 +2,6 @@
 import type ColumnDetails from "@/src/entities/ColumnDetails";
 import { useDroppable } from "@dnd-kit/core";
 import { useState } from "react";
-// import icon from "../../assets/icons/dropdown.svg";
 import useAnimateHeight from "@/src/hooks/useAnimateHeight";
 import Image from "next/image";
 import Card from "./card/Card";

@@ -34,6 +34,10 @@ const Card = ({ cardData, color, data }: Props) => {
       }
     : undefined;
 
+  const deleteCard = async () => {
+    await axios.delete(`/api/applications/${cardData.id}`);
+    router.refresh();
+  };
   return (
     <>
       <div
@@ -53,11 +57,7 @@ const Card = ({ cardData, color, data }: Props) => {
             <CardButton
               setEditModal={setEditModalOpen}
               setDeleteModal={setDeleteModalOpen}
-              deleteAction={async () => {
-                await axios.delete(`/api/applications/${cardData.id}`);
-                router.push("/application");
-                router.refresh();
-              }}
+              deleteAction={deleteCard}
             />
           </div>
         </div>
@@ -78,11 +78,7 @@ const Card = ({ cardData, color, data }: Props) => {
       <DeleteModal
         open={deleteModalOpen}
         setOpen={setDeleteModalOpen}
-        deleteAction={async () => {
-          await axios.delete(`/api/applications/${cardData.id}`);
-          router.push("/application");
-          router.refresh();
-        }}
+        deleteAction={deleteCard}
         heading="Delete Application"
       >
         Are you sure you want to delete the application? <br /> This action

@@ -1,9 +1,9 @@
 "use client";
 import useToast from "@/src/hooks/useToast";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import Form from "./form/Form";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import Form from "./form/Form";
 
 interface Props {
   open: boolean;

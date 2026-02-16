@@ -14,7 +14,9 @@ const NotFound = ({ heading, subtext, type }: Props) => {
   const { theme } = useTheme();
 
   return (
-    <div className="flex flex-col items-center justify-center h-full text-center">
+    <div
+      className={`flex flex-col items-center justify-center h-full text-center ${theme === "dark" ? "bg-dark-primary text-dark-text" : "bg-white"} `}
+    >
       <Image
         className={`${type === "column" ? "w-30" : "w-50 md:w-80"}`}
         width={120}
@@ -25,6 +27,7 @@ const NotFound = ({ heading, subtext, type }: Props) => {
       <h1
         className={`font-bold text-2xl mb-2  ${type === "main" && "md:text-4xl"}`}
       >
+        {type === "main" && <div className="text-5xl font-extrabold">404</div>}
         {heading}
       </h1>
       <p

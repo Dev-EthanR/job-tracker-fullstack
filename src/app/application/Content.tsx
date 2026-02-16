@@ -1,11 +1,11 @@
 "use client";
 import ColumnDetails from "@/src/entities/ColumnDetails";
-import { DragEndEvent, DndContext } from "@dnd-kit/core";
-import React, { useState } from "react";
-import Columns from "../components/Columns";
-import { useRouter, useSearchParams } from "next/navigation";
 import { Application, Status } from "@/src/generated/prisma/client";
+import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import axios from "axios";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
+import Columns from "../components/Columns";
 
 const Content = ({ data }: { data: Application[] }) => {
   const searchParams = useSearchParams();
