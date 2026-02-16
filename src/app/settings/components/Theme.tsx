@@ -1,3 +1,4 @@
+"use client";
 import useTheme from "@/src/hooks/useTheme";
 import Container from "./Container";
 

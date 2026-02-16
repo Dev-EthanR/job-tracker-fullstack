@@ -11,18 +11,10 @@ interface Props {
 }
 
 const AddModal = ({ open, setOpen }: Props) => {
-  // const { setData } = useData();
   const router = useRouter();
 
   const { setToastOpen } = useToast();
   const [loading, setLoading] = useState(false);
-  const [defaultLabel, setDefaultLabel] = useState<string | null>(null);
-
-  useEffect(() => {
-    const item = localStorage.getItem("defaultLabel");
-    if (!item) return;
-    setDefaultLabel(item);
-  }, []);
 
   return (
     <Form

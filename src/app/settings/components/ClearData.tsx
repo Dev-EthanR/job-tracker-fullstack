@@ -1,26 +1,21 @@
 "use client";
-import { useState } from "react";
-import useData from "@/src/hooks/useData";
-import DeleteModal from "@/src/app/components/DeleteModal";
-import Container from "./Container";
 import useToast from "@/src/hooks/useToast";
+import axios from "axios";
+import { useState } from "react";
+import DeleteModal from "../../components/DeleteModal";
+import Container from "./Container";
 
 const ClearData = () => {
-  const { setData } = useData();
   const { setToastOpen } = useToast();
-
-  const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
-
-  function clearData(): void {
-    localStorage.removeItem("jobData");
-    setData([]);
+  const clearData = async () => {
+    await axios.delete("/api/applications");
     setToastOpen({
       open: true,
       message: "Successfully Deleted Data",
       color: "bg-red-600",
     });
-  }
-
+  };
+  const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
   return (
     <Container title="Clear Data">
       <button

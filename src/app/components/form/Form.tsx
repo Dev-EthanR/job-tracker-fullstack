@@ -12,6 +12,7 @@ import type { FormType } from "./FormInput";
 import Input from "./FormInput";
 import LabelOptions from "./FormOptions";
 import { BeatLoader } from "react-spinners";
+import { useEffect } from "react";
 interface Props {
   id: FormType;
   open: boolean;
@@ -50,6 +51,8 @@ const Form = ({
     reset();
     onClose();
   }
+
+  const defaultLabel: string | null = localStorage.getItem("defaultLabel");
 
   const fields: FormFields[] = [
     { name: "Company", key: "company", type: "text", error: errors.company },
@@ -108,7 +111,7 @@ const Form = ({
           id="status"
           {...register("status")}
           className={`block w-full  border rounded-md mt-1 mb-3 h-10 px-4 mr-4 ${theme === "dark" ? "border-gray-600 focus:outline-gray-600 " : "border-gray-300 focus:outline-gray-400"} `}
-          defaultValue={defaultValues?.status}
+          defaultValue={defaultValues?.status || defaultLabel || ""}
         >
           <LabelOptions />
         </select>

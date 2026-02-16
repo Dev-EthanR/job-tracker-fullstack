@@ -31,3 +31,18 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const deleteCount = await prisma.application.deleteMany({});
+    NextResponse.json(
+      { message: `Deleted ${deleteCount.count} users` },
+      { status: 200 },
+    );
+  } catch (err) {
+    NextResponse.json(
+      { error: "Failed to delete records", err },
+      { status: 500 },
+    );
+  }
+}
