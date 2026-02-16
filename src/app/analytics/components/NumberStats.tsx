@@ -14,17 +14,17 @@ const NumberStats = ({ data }: { data: Application[] }) => {
         logo="/notepad.png"
       />
       <StatBox
-        count={dataLength("Interview")}
+        count={dataLength("INTERVIEW")}
         description="Interviews"
         logo="/interview.png"
       />
       <StatBox
-        count={dataLength("Offer")}
+        count={dataLength("OFFER")}
         description="Offers"
         logo="/offer.png"
       />
       <StatBox
-        count={dataLength("Rejected")}
+        count={dataLength("REJECTED")}
         description="Rejected"
         logo="/rejected.webp"
       />
