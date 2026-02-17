@@ -1,7 +1,7 @@
 "use client";
 import useTheme from "@/src/hooks/useTheme";
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState, type ChangeEvent } from "react";
 import AddModal from "./AddModal";
 
@@ -13,11 +13,17 @@ const Header = () => {
   const router = useRouter();
 
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>): void => {
-    const params = new URLSearchParams();
-    if (event.target) params.append("filter", event.target.value);
-    if (event.target.value === "all") return;
-    const query = params.size ? "?" + params.toString() : "";
-    router.push("/applications" + query);
+    const value = event.target.value;
+
+    const params = new URLSearchParams(searchParams.toString());
+    if (value === "all") {
+      params.delete("filter");
+    } else {
+      params.set("filter", value);
+    }
+    const query = params.toString();
+
+    router.replace(`/application/${query ? `?${query}` : ""}`);
   };
 
   return (
