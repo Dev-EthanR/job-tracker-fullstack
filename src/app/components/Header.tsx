@@ -1,7 +1,7 @@
 "use client";
 import useTheme from "@/src/hooks/useTheme";
 import Image from "next/image";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState, type ChangeEvent } from "react";
 import AddModal from "./AddModal";
 
@@ -15,7 +15,7 @@ const Header = () => {
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>): void => {
     const value = event.target.value;
 
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams();
     if (value === "all") {
       params.delete("filter");
     } else {

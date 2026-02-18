@@ -38,8 +38,6 @@ const Content = ({ data }: { data: Application[] }) => {
     router.refresh();
   }
 
-  console.log(searchParams.get("filter"));
-
   return (
     <DndContext onDragEnd={handleDragEnd}>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-4 px-4 gap-y-4 pb-25 md:pb-0 ">
