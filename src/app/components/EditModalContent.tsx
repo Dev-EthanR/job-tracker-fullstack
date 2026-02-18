@@ -29,7 +29,6 @@ const EditModalContent = ({ card, open, setOpen }: Props) => {
         try {
           setLoading(true);
           await axios.patch(`/api/applications/${card.id}`, formData);
-          router.push("/application");
           router.refresh();
           setLoading(false);
           setToastOpen({

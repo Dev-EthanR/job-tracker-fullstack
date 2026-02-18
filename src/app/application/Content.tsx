@@ -4,13 +4,17 @@ import { Application, Status } from "@/src/generated/prisma/client";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Columns from "../components/Columns";
 
 const Content = ({ data }: { data: Application[] }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [applications, setApplications] = useState(data);
+
+  useEffect(() => {
+    setApplications(data);
+  }, [data]);
 
   const columns: ColumnDetails[] = [
     { id: "applied", title: "Applied", color: "bg-applied" },

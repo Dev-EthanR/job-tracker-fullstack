@@ -27,7 +27,6 @@ const AddModal = ({ open, setOpen }: Props) => {
         try {
           setLoading(true);
           await axios.post("/api/applications", data);
-          router.push("/application");
           router.refresh();
           setLoading(false);
           setToastOpen({
