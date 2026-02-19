@@ -5,7 +5,7 @@ const Page404 = () => {
     <main className="w-full h-screen">
       <NotFound
         heading={"Page not found"}
-        subtext={"We cant find the page you're looking for."}
+        subtext={"We can't find the page you're looking for."}
         type={"main"}
       />
     </main>
