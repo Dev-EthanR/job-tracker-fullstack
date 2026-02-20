@@ -1,4 +1,5 @@
 import { prisma } from "@/prisma/lib/prisma";
+import { auth } from "@/src/app/auth/auth";
 import { schema } from "@/src/utilities/schema";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -8,6 +9,8 @@ export async function PATCH(
 ) {
   const body = await req.json();
   const validation = schema.safeParse(body);
+  const session = await auth();
+
   if (!validation.success)
     return NextResponse.json(validation.error.format(), { status: 400 });
 
@@ -20,6 +23,9 @@ export async function PATCH(
 
   if (!application)
     return NextResponse.json({ error: "Invalid Application" }, { status: 404 });
+
+  if (application?.userId !== session?.user?.id)
+    return NextResponse.json({ error: "Unauthorized Access" }, { status: 401 });
 
   const updatedApplication = await prisma.application.update({
     where: { id: application.id },

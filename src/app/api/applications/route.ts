@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/prisma/lib/prisma";
 import { schema } from "@/src/utilities/schema";
+import { auth } from "../../auth/auth";
 
 export async function GET(req: NextRequest) {
   const data = await prisma.application.findMany();
@@ -8,6 +9,8 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  const session = await auth();
+
   try {
     const body = await req.json();
 
@@ -21,6 +24,7 @@ export async function POST(req: NextRequest) {
         status: body.status || "APPLIED",
         date: body.date,
         notes: body.notes || "",
+        userId: session?.user?.id,
       },
     });
     return NextResponse.json(newApp, { status: 201 });

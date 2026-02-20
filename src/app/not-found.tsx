@@ -6,6 +6,7 @@ const Page404 = () => {
       <NotFound
         heading={"Page not found"}
         subtext={"We can't find the page you're looking for."}
+        status={404}
         type={"main"}
       />
     </main>

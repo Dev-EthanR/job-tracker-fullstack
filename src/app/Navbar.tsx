@@ -6,6 +6,9 @@ import { useState, type JSX } from "react";
 import useAnimateHeight from "../hooks/useAnimateHeight";
 import usePreventScroll from "../hooks/usePreventScroll";
 import useTheme from "../hooks/useTheme";
+import SignIn from "./components/auth/SignIn";
+import { SignOut } from "./components/auth/SignOut";
+import { useSession } from "next-auth/react";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -14,10 +17,14 @@ const Navbar = () => {
     if (pathname.startsWith("/application/")) return "Application Details";
     return pathname.slice(1).charAt(0).toUpperCase() + pathname.slice(2);
   }
+
+  if (pathname === "/auth") return null;
+
   const [open, setOpen] = useState<boolean>(false);
   const { height, contentRef } = useAnimateHeight(open);
 
   const { theme } = useTheme();
+  const { data: session } = useSession();
 
   usePreventScroll(open);
 
@@ -42,6 +49,7 @@ const Navbar = () => {
         >
           Settings
         </Link>
+        {session?.user ? <SignOut /> : <SignIn />}
       </nav>
     );
   };

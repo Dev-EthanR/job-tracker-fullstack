@@ -1,13 +1,17 @@
+import { prisma } from "@/prisma/lib/prisma";
 import Toast from "../components/Toast";
 import ClearData from "./components/ClearData";
 import DefaultLabel from "./components/DefaultLabel";
 import DeleteConfirmation from "./components/DeleteConfirmation";
 import Theme from "./components/Theme";
 import SettingsWrapper from "./SettingsWrapper";
+import HeaderSetting from "./components/HeaderSetting";
 
-const page = () => {
+const page = async () => {
+  const user = await prisma.user.findFirst();
   return (
     <SettingsWrapper>
+      <HeaderSetting user={user!} />
       <ClearData />
       <DefaultLabel />
       <DeleteConfirmation />

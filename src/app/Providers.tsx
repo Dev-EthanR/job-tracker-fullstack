@@ -1,5 +1,6 @@
 "use client";
 
+import { SessionProvider } from "next-auth/react";
 import {
   createContext,
   ReactNode,
@@ -55,10 +56,12 @@ export default function Providers({ children }: Props) {
   }, [theme]);
 
   return (
-    <ThemeCtx.Provider value={{ theme, setTheme }}>
-      <ToastCtx.Provider value={{ toastOpen, setToastOpen }}>
-        {children}
-      </ToastCtx.Provider>
-    </ThemeCtx.Provider>
+    <SessionProvider>
+      <ThemeCtx.Provider value={{ theme, setTheme }}>
+        <ToastCtx.Provider value={{ toastOpen, setToastOpen }}>
+          {children}
+        </ToastCtx.Provider>
+      </ThemeCtx.Provider>
+    </SessionProvider>
   );
 }

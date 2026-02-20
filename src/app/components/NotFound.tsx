@@ -8,9 +8,10 @@ interface Props {
   heading: string;
   subtext: string;
   type: Missing;
+  status?: number;
 }
 
-const NotFound = ({ heading, subtext, type }: Props) => {
+const NotFound = ({ heading, subtext, type, status }: Props) => {
   const { theme } = useTheme();
 
   return (
@@ -27,7 +28,7 @@ const NotFound = ({ heading, subtext, type }: Props) => {
       <h1
         className={`font-bold text-2xl mb-2  ${type === "main" && "md:text-4xl"}`}
       >
-        {type === "main" && <div className="text-5xl font-extrabold">404</div>}
+        {status && <div className="text-5xl font-extrabold">404</div>}
         {heading}
       </h1>
       <p
