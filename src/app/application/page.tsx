@@ -1,5 +1,3 @@
-import { redirect } from "next/navigation";
-import { auth } from "../auth/auth";
 import Toast from "../components/Toast";
 import Application from "./Application";
 import ApplicationWrapper from "./ApplicationWrapper";
@@ -12,5 +10,6 @@ const page = () => {
     </ApplicationWrapper>
   );
 };
+export const dynamic = "force-dynamic";
 
 export default page;

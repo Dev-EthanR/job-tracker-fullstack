@@ -4,7 +4,7 @@ import { Application, Status } from "@/src/generated/prisma/client";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Columns from "../components/Columns";
 
 const Content = ({ data }: { data: Application[] }) => {
@@ -48,12 +48,13 @@ const Content = ({ data }: { data: Application[] }) => {
         {columns.map((column) =>
           searchParams.get("filter") === column.id.toLowerCase() ||
           searchParams.get("filter") === null ? (
-            <Columns key={column.id} column={column} data={applications} />
+            <Suspense key={column.id} fallback={<p>Loading...</p>}>
+              <Columns key={column.id} column={column} data={applications} />
+            </Suspense>
           ) : null,
         )}
       </div>
     </DndContext>
   );
 };
-
 export default Content;
