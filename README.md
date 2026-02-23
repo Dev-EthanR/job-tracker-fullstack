@@ -142,7 +142,11 @@ npm run dev
 | ![](./screenshots/drag.png) | ![](./screenshots/mobile.png) |
 
 ---
+## 🔮 Future Improvements
 
+* Credentials Login/Sign up
+
+---
 ## 👤 Author
 
 **Ethan**
