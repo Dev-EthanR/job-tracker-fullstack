@@ -7,7 +7,7 @@ export function SignIn() {
       <SignInProvider
         text="Continue with Google"
         provider="google"
-        image="/Google_logo.svg.webp"
+        image="/Google_logo.svg.png"
       />
     </div>
   );
