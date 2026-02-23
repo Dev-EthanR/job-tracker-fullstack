@@ -15,7 +15,7 @@ export default function SignInProvider({ text, provider, image }: Props) {
       onClick={() => signIn(provider, { redirectTo: "/application" })}
       className="flex justify-center items-center gap-3 font-medium border-transparent hover:border-accent  border px-3 py-2 rounded-sm cursor-pointer"
     >
-      <Image src={image} alt="" width={30} height={30} />
+      <Image src={image} alt="" width={55} height={55} />
       {text}
     </button>
   );
