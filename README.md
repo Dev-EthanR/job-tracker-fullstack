@@ -1,36 +1,150 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# 📊 Job Application Tracker
 
-First, run the development server:
+A responsive, accessible job application tracking web app that helps users manage applications across multiple stages using a Kanban-style workflow.
+
+Built as a **frontend-focused portfolio project** to demonstrate real-world UI architecture, drag-and-drop interactions, form handling, accessibility, and data visualization.
+
+## 🚀 Live Demo
+[![Live Demo](https://img.shields.io/badge/Live_Demo-View-blue?style=for-the-badge)](https://job-tracker-psi-seven.vercel.app/)
+
+---
+
+## ✨ Features
+
+### 📋 Kanban Board
+
+* Four application stages (Applied, Interview, Offer, Rejected)
+* Drag & drop cards between columns
+* Clear visual drag indicators
+* Empty column states with helpful messaging
+* Badge counters per column
+
+### 🧾 Application Cards
+
+* Company name, role, date, and status
+* Context menu (⋯) for edit & delete actions
+* Card details page with full application info
+* Cards are removed instantly on delete (no ghost state)
+
+### ➕ Add / Edit Applications
+
+* Modal-based form
+* Form validation with clear error states
+* Keyboard accessible modals
+* Focus trapping and ESC-to-close support
+
+### 📊 Analytics Page
+
+* Visual breakdown of applications by status
+* Charts built with Chart.js
+* Clean, readable presentation for quick insights
+
+### ⚙️ Settings Page
+
+* Frontend-only configuration
+* Structured to scale for future preferences
+
+### 🚫 404 Page
+
+* Friendly error state
+* Clear navigation back to the app
+
+---
+
+## ♿ Accessibility
+
+* Semantic HTML
+* Full keyboard navigation
+* Focus trapping for modals
+* Correct tab order and focus cycling
+* ESC key support
+* ARIA attributes where appropriate
+* Clear visual focus indicators
+
+---
+
+## 📱 Responsive Design
+
+* **Mobile:** Single-column layout
+* **Tablet:** Compact board layout
+* **Desktop:** Full 4-column Kanban board
+
+Built mobile-first and scaled up.
+
+---
+
+### 🛠 Tech Stack
+
+**Frontend**
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-4-06B6D4?logo=tailwindcss&logoColor=white)
+
+**State & Forms**
+![React Hook Form](https://img.shields.io/badge/React_Hook_Form-7-EC5990?logo=reacthookform&logoColor=white)
+![Zod](https://img.shields.io/badge/Zod-4-3E67B1?logo=zod&logoColor=white)
+
+**Drag & Drop**
+![dnd-kit](https://img.shields.io/badge/dnd--kit-Accessible-blue)
+
+**Charts & Analytics**
+![Chart.js](https://img.shields.io/badge/Chart.js-4-FF6384?logo=chartdotjs&logoColor=white)
+
+**Full Stack FrameWork**
+![Next](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+
+**Tooling**
+![Focus Trap](https://img.shields.io/badge/Focus--Trap-Accessibility-green)
+![ESLint](https://img.shields.io/badge/ESLint-9-4B32C3?logo=eslint&logoColor=white)
+
+---
+
+## 🚀 Getting Started
 
 ```bash
+git clone https://github.com/your-username/job-tracker.git
+cd job-tracker
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🎯 Project Goals
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* Build a realistic frontend application similar to real-world job trackers
+* Demonstrate:
 
-## Learn More
+  * Component-driven React architecture
+  * Drag-and-drop UX patterns
+  * Accessible modal and form design
+  * State management without a backend
+  * Clean, maintainable TypeScript code
+  * Focus on **usability and clarity over feature bloat**
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📸 Screenshots
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+| Desktop View | Analytics |
+|--------------|-----------|
+| ![](./screenshots/desktop.png) | ![](./screenshots/analytics.png) |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Application Details | Add Modal |
+|---------------------|------------------|
+| ![](./screenshots/application-details.png) | ![](./screenshots/modal.png) |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Drag  | Mobile View |
+|-------------|-------------|
+| ![](./screenshots/drag.png) | ![](./screenshots/mobile.png) |
+
+---
+
+## 👤 Author
+
+**Ethan**
+Frontend Developer
+Portfolio Project – 2026
