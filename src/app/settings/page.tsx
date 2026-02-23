@@ -6,9 +6,23 @@ import DeleteConfirmation from "./components/DeleteConfirmation";
 import Theme from "./components/Theme";
 import SettingsWrapper from "./SettingsWrapper";
 import HeaderSetting from "./components/HeaderSetting";
+import { redirect } from "next/navigation";
+import { auth } from "../auth/auth";
 
 const page = async () => {
-  const user = await prisma.user.findFirst();
+  const session = await auth();
+
+  if (!session) redirect("/auth");
+  const account = await prisma.account.findFirst({
+    where: {
+      userId: session.user?.id,
+    },
+  });
+  const user = await prisma.user.findUnique({
+    where: {
+      id: account?.userId,
+    },
+  });
   return (
     <SettingsWrapper>
       <HeaderSetting user={user!} />

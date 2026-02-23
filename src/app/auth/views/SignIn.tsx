@@ -1,7 +1,15 @@
-import React from "react";
+import SignInProvider from "../components/SignInProvider";
 
-const SignIn = () => {
-  return <div>SignIn</div>;
-};
+export function SignIn() {
+  return (
+    <div className="flex flex-col items-center justify-center h-full gap-4">
+      <SignInProvider
+        text="Continue with Google"
+        provider="google"
+        image="/Google_logo.svg.webp"
+      />
+    </div>
+  );
+}
 
 export default SignIn;

@@ -1,11 +1,15 @@
-import React from "react";
+import { redirect } from "next/navigation";
+import { auth } from "./auth";
+import AuthWrapper from "./AuthWrapper";
 import SignIn from "./views/SignIn";
 
-const page = () => {
+const page = async () => {
+  const session = await auth();
+  if (session?.user) redirect("/application");
   return (
-    <div>
+    <AuthWrapper>
       <SignIn />
-    </div>
+    </AuthWrapper>
   );
 };
 

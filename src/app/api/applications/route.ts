@@ -37,10 +37,16 @@ export async function POST(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
+  const session = await auth();
+
   try {
-    const deleteCount = await prisma.application.deleteMany({});
+    const deleteCount = await prisma.application.deleteMany({
+      where: {
+        userId: session?.user?.id,
+      },
+    });
     return NextResponse.json(
-      { message: `Deleted ${deleteCount.count} users` },
+      { message: `Deleted ${deleteCount.count} applications` },
       { status: 200 },
     );
   } catch (err) {

@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+import { auth } from "../auth/auth";
 import Toast from "../components/Toast";
 import Application from "./Application";
 import ApplicationWrapper from "./ApplicationWrapper";

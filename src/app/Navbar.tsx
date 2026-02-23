@@ -1,4 +1,5 @@
 "use client";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -6,9 +7,7 @@ import { useState, type JSX } from "react";
 import useAnimateHeight from "../hooks/useAnimateHeight";
 import usePreventScroll from "../hooks/usePreventScroll";
 import useTheme from "../hooks/useTheme";
-import SignIn from "./components/auth/SignIn";
-import { SignOut } from "./components/auth/SignOut";
-import { useSession } from "next-auth/react";
+import { SignOut } from "./auth/components/SignOut";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -49,7 +48,11 @@ const Navbar = () => {
         >
           Settings
         </Link>
-        {session?.user ? <SignOut /> : <SignIn />}
+        {session?.user && (
+          <SignOut
+            style={`${theme === "dark" ? "hover:text-dark-hover" : "hover:text-hover"}`}
+          />
+        )}
       </nav>
     );
   };
